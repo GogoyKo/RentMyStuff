@@ -1,8 +1,11 @@
- <?php                                 
-                                    while($row = mysqli_fetch_array($result))
+<?php 
+	include "config.php";
+ 
+
+if(isset($_POST["userupdate"])){
+	header("location:config.php");
+}
 
 
-                                       {
-                                       }
-                                       
-                                  ?>
+	
+?>	

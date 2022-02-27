@@ -241,6 +241,9 @@ $result = mysqli_query($con,"SELECT * FROM rentmystufftable");
                 <div class="btn-group">
                  
                 <button data-id='<?php echo $row['id']; ?>' class="userinfo btn btn-success">Info</button>
+                 <button data-id='<?php echo $row['id']; ?>' class="userupdate btn btn-success">update</button>
+                
+
 
 
 
@@ -302,24 +305,24 @@ $result = mysqli_query($con,"SELECT * FROM rentmystufftable");
    
    <div class="input-group mb-1" >
   <span class="input-group-text">Owner Name</span>
-  <input type="text" aria-label="owner name" name="name" class="form-control">
+  <input type="text" aria-label="owner name" id="name" name="name" class="form-control">
 </div>
 <div class="input-group mb-1" >
   <span class="input-group-text">Contact Number</span>
-  <input type="text" aria-label="contact number"  name="contact" class="form-control">
+  <input type="text" aria-label="contact number" id="contact" name="contact" class="form-control">
 </div>
 <div class="input-group mb-1" >
   <span class="input-group-text">Location</span>
-  <input type="text" aria-label="location"  name="address" class="form-control">
+  <input type="text" aria-label="location" id="address"  name="address" class="form-control">
 </div>
 <div class="input-group mb-1" >
   <span class="input-group-text">Stuff Name</span>
-  <input type="text" aria-label="stuff name"  name="stuff_name" class="form-control">
+  <input type="text" aria-label="stuff name" id="stuff_name" name="stuff_name" class="form-control">
 </div>
 
 <div class="input-group mb-1" >
   <span class="input-group-text">Price</span>
-  <input type="text" aria-label="price"  name="price" class="form-control">
+  <input type="text" aria-label="price" id="price" name="price" class="form-control">
 </div>
   </div>
 
@@ -364,6 +367,30 @@ $result = mysqli_query($con,"SELECT * FROM rentmystufftable");
                     });
                 });
             });
+
+
+
+      
+      $(document).on('click', '.edit_data', function(){  
+           var employee_id = $(this).attr("id");  
+           $.ajax({  
+                url:"read.php",  
+                method:"POST",  
+                data:{employee_id:employee_id},  
+                dataType:"json",  
+                success:function(data){  
+                     $('#name').val(data.name);  
+                     $('#contact').val(data.contact);  
+                     $('#address').val(data.address);  
+                     $('#stuff_name').val(data.stuff_name);  
+                     $('#price').val(data.price);  
+                     $('#employee_id').val(data.id);  
+                     $('#insert').val("Update");  
+                     $('#add_data_Modal').modal('show');  
+                }  
+           });  
+      });  
+
             </script>
              </div>
         <div class="modal fade" id="empModal" role="dialog">
@@ -377,6 +404,7 @@ $result = mysqli_query($con,"SELECT * FROM rentmystufftable");
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         
                         </div>
                     </div>
                 </div>
